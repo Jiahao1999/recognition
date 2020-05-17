@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>语音识别</title>
+    <script type="text/javascript" src="jquery-1.8.2.min.js"></script>
+    <script src="jq.snow.js"></script>
+    <!--下面是调用方法和参数说明-->
+    <script>
+    $(function(){
+        $.fn.snow({ 
+            minSize: 5,     //雪花的最小尺寸
+            maxSize: 40,    //雪花的最大尺寸
+            newOn: 100      //雪花出现的频率 这个数值越小雪花越多
+        });
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/jingjingjingjingjingjingrj/custom.css?v=8CHeYsQD/WObf9s0nxeXiqy76fA=" />
+
+</head>
+<body style="background:#3B3B3B url(22.jpg) no-repeat center; height:550px;">
+
+<!-- 浏览器页面title -->
+<script type="text/javascript" language="javascript">
+    var time;
+    var normar_title=document.title;
+    document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState == 'hidden') {
+         clearTimeout(time);        
+         document.title = '客官请留步ε=ε=ε=┏(゜ロ゜;)┛';
+    } else {
+        document.title = '你终于回来了(。・∀・)ノ';
+        time=setTimeout(function(){ document.title = normar_title; }, 3000);
+}
+});
+</script>
+
+<!-- 主页浏览器小图标 -->
+<script type="text/javascript">
+    var head = document.getElementsByTagName('head')[0],
+    linkTag = document.createElement('link');
+    linkTag.href="https://blog-static.cnblogs.com/files/jingjingjingjingjingjingrj/favicon.ico";
+    linkTag.setAttribute('rel','shortcut icon');
+    linkTag.setAttribute('type','image/x-icon');
+    head.appendChild(linkTag); 
+</script>
+
+<!-- 鼠标点击特效 -->
+<script src="https://blog-static.cnblogs.com/files/jingjingjingjingjingjingrj/cursor-effects.js" defer></script>
+
+
+<!-- 整个页面 -->
+    <div class = "out" >
+        <marquee><span style="font-weight: bolder;font-size: 40px;color: orange;">Welcome! we are '传奇家庭小组'！让我们开始语音识别之路吧！</span></marquee>
+        <h1 class="one-title">语音识别</h1>
+        
+        
+        <div class="context">
+            <p class="ziti"> &nbsp &nbsp&nbsp &nbsp语音识别是一门交叉学科。近二十年来，语音识别技术取得显著进步，开始从实验室走向市场。人们预计，未来10年内，语音识别技术将进入工业、家电、通信、汽车电子、医疗、家庭服务、消费电子产品等各个领域。 语音识别听写机在一些领域的应用被美国新闻界评为1997年计算机发展十件大事之一。很多专家都认为语音识别技术是2000年至2010年间信息技术领域十大重要的科技发展技术之一。 语音识别技术所涉及的领域包括：信号处理、模式识别、概率论和信息论、发声机理和听觉机理、人工智能等等。</p>
+            <div class="robot"><img src="3.jpg"></div>
+            <div class="three">
+                <audio autoplay></audio>
+                <input onclick="startRecording()" type="button" value="录音" class="record" />
+                <input onclick="stopRecording()" type="button" value="停止" class="stop" />
+                <
+                <input onclick="playRecording()" type="button" value="播放" class="play" />
+            </div>
+        </div>
+
+  
+    </div>
+
+    <script type="text/javascript" src="HZRecorder.js"></script>
+    <script type="text/javascript" src='ThreeCanvas.js'></script>
+    <script type="text/javascript" src='Snow.js'></script>
+
+<!-- 按钮 -->
+    <script>
+        var recorder;
+
+        var audio = document.querySelector('audio');
+
+        function startRecording() {
+            HZRecorder.get(function (rec) {
+                recorder = rec;
+                recorder.start();
+            });
+        }
+
+        function stopRecording() {
+            recorder.stop();
+        }
+
+        function playRecording() {
+            recorder.play(audio);
+        }
+
+        function uploadAudio() {
+            recorder.upload("Handler1.ashx", function (state, e) {
+                switch (state) {
+                    case 'uploading':
+                        //var percentComplete = Math.round(e.loaded * 100 / e.total) + '%';
+                        break;
+                    case 'ok':
+                        //alert(e.target.responseText);
+                        alert("上传成功");
+                        break;
+                    case 'error':
+                        alert("上传失败");
+                        break;
+                    case 'cancel':
+                        alert("上传被取消");
+                        break;
+                }
+            });
+        }
+
+    </script>
+
+</body>
+</html>
+</div>
+
+
